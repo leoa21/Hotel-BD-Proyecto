@@ -1,6 +1,8 @@
 
 import Logica.conexion;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /*
@@ -16,32 +18,33 @@ import javax.swing.JOptionPane;
 public class signup extends javax.swing.JFrame {
     
     conexion cc = new conexion();
-    Connection con = cc.conectar();
+    Connection con;
 
     /**
      * Creates new form signup
      */
-    public signup() {
+    public signup() throws ClassNotFoundException {
+        this.con = cc.conectar();
         initComponents();
     }
     
     public void registrarUsuario(){
         
         String nombre = txtNombre.getText();
-        String email = txtEmail.getText();
+        String user = txtUsuario.getText();
         String pass = String.valueOf(txtPass.getPassword());
-        String SQL = "insert into usuarios (nombre, email, pass) values(?,?,?)";
+        String SQL = "insert into usuario (nombre,user, pass) values(?,?,?)";
         int resp = 0;
         
-        if(nombre.equals("") || email.equals("") || pass.equals("")){
+        if(user.equals("") || pass.equals("")){
             JOptionPane.showMessageDialog(null, "Todos los campos son requeridos");
         }else{
             try {
                 PreparedStatement pst = con.prepareStatement(SQL);
-            
-                pst.setString(1, nombre);
-                pst.setString(2, email);
-                pst.setString(3, pass);
+           
+                pst.setString(1, user);
+                pst.setString(2, pass);
+                pst.setString(3, nombre);
             
                 pst.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Registro Exitoso");
@@ -70,7 +73,7 @@ public class signup extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
-        txtEmail = new javax.swing.JTextField();
+        txtUsuario = new javax.swing.JTextField();
         txtPass = new javax.swing.JPasswordField();
         BtnIniciar = new javax.swing.JButton();
         btnClean = new javax.swing.JButton();
@@ -84,10 +87,10 @@ public class signup extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel2.setText("Nombre del Empleado");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 490, 130, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 480, 130, -1));
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel3.setText("Email");
+        jLabel3.setText("Usuario");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 540, 85, -1));
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(148, 386, -1, -1));
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(158, 378, -1, -1));
@@ -104,13 +107,13 @@ public class signup extends javax.swing.JFrame {
         });
         getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 480, 272, -1));
 
-        txtEmail.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        txtEmail.addActionListener(new java.awt.event.ActionListener() {
+        txtUsuario.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        txtUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEmailActionPerformed(evt);
+                txtUsuarioActionPerformed(evt);
             }
         });
-        getContentPane().add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 530, 272, -1));
+        getContentPane().add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 530, 272, -1));
 
         txtPass.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         getContentPane().add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 580, 270, -1));
@@ -151,9 +154,9 @@ public class signup extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
+    private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtEmailActionPerformed
+    }//GEN-LAST:event_txtUsuarioActionPerformed
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
@@ -200,7 +203,11 @@ public class signup extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new signup().setVisible(true);
+                try {
+                    new signup().setVisible(true);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(signup.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -216,8 +223,8 @@ public class signup extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JPasswordField txtPass;
+    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

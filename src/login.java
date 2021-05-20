@@ -11,12 +11,14 @@
 
 import Logica.conexion;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class login extends javax.swing.JFrame {
     
     conexion cc = new conexion();
-    Connection con = cc.conectar();
+    Connection con;
     
     /**
      * Creates new form login
@@ -146,8 +148,12 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPassActionPerformed
 
     private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
-        // TODO add your handling code here:
-        new signup().setVisible(true);
+        try {
+            // TODO add your handling code here:
+            new signup().setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.dispose();
     }//GEN-LAST:event_btnRegistroActionPerformed
 

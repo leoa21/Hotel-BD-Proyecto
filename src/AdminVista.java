@@ -79,6 +79,11 @@ public class AdminVista extends javax.swing.JFrame {
         btnSedes.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnSedes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/hotel (1).png"))); // NOI18N
         btnSedes.setText("            Sedes");
+        btnSedes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSedesActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnSedes, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 570, 250, 67));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LogoCompleto.jpeg"))); // NOI18N
@@ -108,6 +113,11 @@ public class AdminVista extends javax.swing.JFrame {
         new DetallesHabitacion().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnHabitacionesActionPerformed
+
+    private void btnSedesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSedesActionPerformed
+        new DetalleSede().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnSedesActionPerformed
 
     /**
      * @param args the command line arguments
