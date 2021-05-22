@@ -3,12 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Leo21/Documents/Hotel_Base/Hotel/src/DetalleEmpleado.java</file>
+            <file>file:/C:/Users/Leo21/Documents/Hotel_Base/Hotel/src/Datos/vLocal.java</file>
             <file>file:/C:/Users/Leo21/Documents/Hotel_Base/Hotel/src/DetalleSede.java</file>
-            <file>file:/C:/Users/Leo21/Documents/Hotel_Base/Hotel/src/signup.java</file>
-            <file>file:/C:/Users/Leo21/Documents/Hotel_Base/Hotel/src/AdminVista.java</file>
+            <file>file:/C:/Users/Leo21/Documents/Hotel_Base/Hotel/src/Logica/fDetalleSedes.java</file>
             <file>file:/C:/Users/Leo21/Documents/Hotel_Base/Hotel/src/Logica/conexion.java</file>
-            <file>file:/C:/Users/Leo21/Documents/Hotel_Base/Hotel/src/login.java</file>
+            <file>file:/C:/Users/Leo21/Documents/Hotel_Base/Hotel/src/Logica/estados.java</file>
         </group>
     </open-files>
 </project-private>

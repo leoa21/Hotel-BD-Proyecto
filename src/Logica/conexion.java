@@ -7,7 +7,6 @@ package Logica;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
@@ -28,7 +27,7 @@ public class conexion {
         Connection link = null;
         
         try{
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection(url, user, pass);
             return con;
         }catch(Exception e){
