@@ -21,7 +21,7 @@ public class fHabitacionesRecepcion_CargoExtra {
     private String sSQL = "";
     public float totalConsumo;
     
-    public DefaultTableModel mostrar(String buscar){
+    public DefaultTableModel mostrar(int buscar){
         
         DefaultTableModel modelo;
         
@@ -32,7 +32,7 @@ public class fHabitacionesRecepcion_CargoExtra {
         
         modelo = new DefaultTableModel(null, titulos);
         
-        sSQL = "select * ce.id_cargoextra, ce.habitacion_id_ce, ce.cargoextra_id,cce.descripcion_c, cce.precio_c, ce.cantidad_ce ,ce.fecha_ce from cargoextra ce inner join catalog_cargoextra cce on ce.c_cargoextra_id = cce.cargoextra_id where ce.habitacion_id_c= '%" + buscar + "%' order by id_idcargoextra desc";
+        sSQL = "select ce.id_cargoextra, ce.habitacion_id_ce, ce.c_cargoextra_id,cce.descripcion_c, cce.precio_c, ce.cantidad_ce ,ce.fecha_ce from cargoextra ce inner join catalog_cargoextra cce on ce.c_cargoextra_id = cce.c_cargoextra_id where habitacion_id_ce= " + buscar + " order by id_cargoextra desc";
         
         try{
             Statement st = cn.createStatement();
@@ -42,13 +42,14 @@ public class fHabitacionesRecepcion_CargoExtra {
                 
                 registro [0] =rs.getString("id_cargoextra");
                 registro [1] =rs.getString("habitacion_id_ce");
-                registro [2] =rs.getString("cargoextra_id");
+                registro [2] =rs.getString("c_cargoextra_id");
                 registro [3] =rs.getString("descripcion_c");
                 registro [4] =rs.getString("precio");
                 registro [6] =rs.getString("cantidad_ce");
                 registro [7] =rs.getString("fecha_c");
                 
                 totalConsumo = totalConsumo + (rs.getFloat("cantidad_ce") * rs.getFloat("PrecioUnitario"));
+                
                 modelo.addRow(registro);
                
             }

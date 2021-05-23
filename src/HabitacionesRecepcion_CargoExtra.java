@@ -1,12 +1,16 @@
 
 import Datos.vCargoExtra;
 import Logica.cargoExtra;
+import Logica.conexion;
 
 import Logica.habitacion;
 import Logica.fHabitacionesRecepcion_CargoExtra;
+import java.awt.event.ItemEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
-import java.util.Calendar;
-import java.util.Date;
+
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -24,7 +28,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class HabitacionesRecepcion_CargoExtra extends javax.swing.JFrame {
     
-    public static String id_Habitacion;
+    
     
 
     /**
@@ -32,7 +36,8 @@ public class HabitacionesRecepcion_CargoExtra extends javax.swing.JFrame {
      */
     public HabitacionesRecepcion_CargoExtra() {
         initComponents();
-       
+        
+        
         cargoExtra ce = new cargoExtra();
         DefaultComboBoxModel modelCargoE = new DefaultComboBoxModel(ce.mostrarCargoExtra());
         cmbCargoExtra.setModel(modelCargoE);
@@ -60,7 +65,7 @@ public class HabitacionesRecepcion_CargoExtra extends javax.swing.JFrame {
         tablaListado.getColumnModel().getColumn(2).setPreferredWidth(0);
     }
      
-    void mostrar(String buscar){
+    void mostrar(int buscar){
         try {
             DefaultTableModel modelo;
             
@@ -83,7 +88,8 @@ public class HabitacionesRecepcion_CargoExtra extends javax.swing.JFrame {
         txtCargo_id.setText("");
         txtPrecioUnitario.setText("");
         txtCantidad.setText("");
-       
+        
+       txtFecha.setText("");
         cmbCargoExtra.setSelectedIndex(0);
     }
 
@@ -285,6 +291,8 @@ public class HabitacionesRecepcion_CargoExtra extends javax.swing.JFrame {
             return;
         }
         
+        
+        
         if(txtCantidad.getText().equals("")){
             JOptionPane.showConfirmDialog(rootPane, "No ha ingresado una cantidad");
             txtCantidad.requestFocus();
@@ -316,7 +324,9 @@ public class HabitacionesRecepcion_CargoExtra extends javax.swing.JFrame {
         
         if(func.insertar(dts)){
             JOptionPane.showMessageDialog(rootPane, "Cargo extra agregado satisfactoriamente");
-            mostrar("");
+            
+            mostrar(numHabitacion);
+            limpiar();
         }
         
         
@@ -332,7 +342,8 @@ public class HabitacionesRecepcion_CargoExtra extends javax.swing.JFrame {
                 
                 dts.setId_cargoextra(Integer.parseInt(txtCargo_id.getText()));
                 func.eliminar(dts);
-                mostrar("");
+                int numHabitacion = cmbHabitacion.getSelectedIndex();
+                mostrar(numHabitacion);
             }
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
@@ -357,7 +368,31 @@ public class HabitacionesRecepcion_CargoExtra extends javax.swing.JFrame {
 
     private void cmbHabitacionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbHabitacionItemStateChanged
         
-      
+        
+        //Pendiente
+        if(evt.getStateChange() == ItemEvent.SELECTED){
+            habitacion h = (habitacion) cmbHabitacion.getSelectedItem();
+            try{
+                
+                DefaultTableModel modelo = new DefaultTableModel();
+                tablaListado.setModel(modelo);
+                
+                PreparedStatement ps = null;
+                ResultSet rs = null;
+    
+                conexion mysql = new conexion();
+                Connection con = mysql.conectar();
+                
+                String SQL = "select * from cargoextra where habitacion_id_ce="+h.getId_habitacion();
+                ps = con.prepareStatement(SQL);
+                rs = ps.executeQuery();
+                mostrar(h.getId_habitacion());
+                
+            } catch(Exception e){
+                
+            }
+            
+        }
     }//GEN-LAST:event_cmbHabitacionItemStateChanged
 
     private void cmbCargoExtraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCargoExtraActionPerformed
