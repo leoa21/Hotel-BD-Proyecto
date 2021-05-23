@@ -5,27 +5,34 @@
  */
 package Datos;
 
+import java.util.Date;
+
 /**
  *
  * @author Leo21
  */
 public class vCargoExtra {
         
-     private int id_cargoextra;
-    private String nombre_cargoextra;
+    private int id_cargoextra;
     private float costo;
-    private int fecha_ce;
+    private String fecha_ce;
     private int cantidad_ce;
+    private int habitacion_id;
+    private float c_cargoextra;
+    private int cce_cargoextra;
 
-    public vCargoExtra() {
-    }
-
-    public vCargoExtra(int id_cargoextra, String nombre_cargoextra, float costo, int fecha_ce, int cantidad_ce) {
+    public vCargoExtra(int id_cargoextra, float costo, String fecha_ce, int cantidad_ce, int habitacion_id, float c_cargoextra, int cce_cargoextra) {
         this.id_cargoextra = id_cargoextra;
-        this.nombre_cargoextra = nombre_cargoextra;
         this.costo = costo;
         this.fecha_ce = fecha_ce;
         this.cantidad_ce = cantidad_ce;
+        this.habitacion_id = habitacion_id;
+        this.c_cargoextra = c_cargoextra;
+        this.cce_cargoextra = cce_cargoextra;
+    }
+
+    public vCargoExtra(){
+        
     }
 
     public int getId_cargoextra() {
@@ -36,14 +43,6 @@ public class vCargoExtra {
         this.id_cargoextra = id_cargoextra;
     }
 
-    public String getNombre_cargoextra() {
-        return nombre_cargoextra;
-    }
-
-    public void setNombre_cargoextra(String nombre_cargoextra) {
-        this.nombre_cargoextra = nombre_cargoextra;
-    }
-
     public float getCosto() {
         return costo;
     }
@@ -52,11 +51,11 @@ public class vCargoExtra {
         this.costo = costo;
     }
 
-    public int getFecha_ce() {
+    public String getFecha_ce() {
         return fecha_ce;
     }
 
-    public void setFecha_ce(int fecha_ce) {
+    public void setFecha_ce(String fecha_ce) {
         this.fecha_ce = fecha_ce;
     }
 
@@ -67,4 +66,35 @@ public class vCargoExtra {
     public void setCantidad_ce(int cantidad_ce) {
         this.cantidad_ce = cantidad_ce;
     }
+
+    public int getHabitacion_id() {
+        return habitacion_id;
+    }
+
+    public void setHabitacion_id(int habitacion_id) {
+        this.habitacion_id = habitacion_id;
+    }
+
+    public float getC_cargoextra() {
+        return c_cargoextra;
+    }
+
+    public void setC_cargoextra(float c_cargoextra) {
+        this.c_cargoextra = c_cargoextra;
+    }
+
+    public int getCce_cargoextra() {
+        return cce_cargoextra;
+    }
+
+    public void setCce_cargoextra(int cce_cargoextra) {
+        this.cce_cargoextra = cce_cargoextra;
+    }
+    
+    
+    
+    
+    
+
+    
 }

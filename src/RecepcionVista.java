@@ -39,17 +39,18 @@ public class RecepcionVista extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnHabitacionRecepcion.setBackground(new java.awt.Color(0, 102, 0));
+        btnHabitacionRecepcion.setBackground(new java.awt.Color(102, 102, 255));
         btnHabitacionRecepcion.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnHabitacionRecepcion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bed (1).png"))); // NOI18N
-        btnHabitacionRecepcion.setText(" Habitaciones");
+        btnHabitacionRecepcion.setText("Servicio a la habitacion");
         btnHabitacionRecepcion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHabitacionRecepcionActionPerformed(evt);
             }
         });
-        getContentPane().add(btnHabitacionRecepcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 176, -1));
+        getContentPane().add(btnHabitacionRecepcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 230, -1));
 
+        btnCheckIn.setBackground(new java.awt.Color(51, 51, 255));
         btnCheckIn.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnCheckIn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/check-in (1).png"))); // NOI18N
         btnCheckIn.setText("Check - In");
@@ -59,8 +60,9 @@ public class RecepcionVista extends javax.swing.JFrame {
                 btnCheckInActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCheckIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, 160, 72));
+        getContentPane().add(btnCheckIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 160, 72));
 
+        btnCheckOut.setBackground(new java.awt.Color(255, 51, 51));
         btnCheckOut.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnCheckOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/check-out (1).png"))); // NOI18N
         btnCheckOut.setText("Check - Out");
@@ -69,9 +71,9 @@ public class RecepcionVista extends javax.swing.JFrame {
                 btnCheckOutActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCheckOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, 180, -1));
+        getContentPane().add(btnCheckOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 10, 160, -1));
 
-        btnDetallesCliente.setBackground(new java.awt.Color(0, 102, 102));
+        btnDetallesCliente.setBackground(new java.awt.Color(153, 51, 255));
         btnDetallesCliente.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnDetallesCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/details (1).png"))); // NOI18N
         btnDetallesCliente.setText(" Cliente Detalle");
@@ -80,7 +82,7 @@ public class RecepcionVista extends javax.swing.JFrame {
                 btnDetallesClienteActionPerformed(evt);
             }
         });
-        getContentPane().add(btnDetallesCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 10, 176, -1));
+        getContentPane().add(btnDetallesCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 10, 176, -1));
 
         btnCerrarSesion.setBackground(new java.awt.Color(204, 0, 0));
         btnCerrarSesion.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -94,7 +96,7 @@ public class RecepcionVista extends javax.swing.JFrame {
         getContentPane().add(btnCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 10, -1, 60));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FndoHotel(2).jpg"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 1330, 740));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1330, 740));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

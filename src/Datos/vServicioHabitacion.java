@@ -17,6 +17,16 @@ public class vServicioHabitacion {
     private float costo_servicio ;
     private int habitacion_id_s;
     private int id_emp_s ;
+    private int c_serviciohabitacion_id;
+    
+    public int getC_serviciohabitacion_id() {
+        return c_serviciohabitacion_id;
+    }
+
+    public void setC_serviciohabitacion_id(int c_serviciohabitacion_id) {
+        this.c_serviciohabitacion_id = c_serviciohabitacion_id;
+    }
+    
 
     public vServicioHabitacion() {
     }
