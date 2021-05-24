@@ -1,22 +1,35 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- *
- * @author Leo21
- */
+
+import Datos.vCheckIn;
+import Logica.fCheckOut;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+
 public class CheckOut extends javax.swing.JFrame {
 
-    /**
-     * Creates new form CheckOut
-     */
+    
     public CheckOut() {
         initComponents();
+        mostrar("131");
     }
 
+    
+    void mostrar (String buscar){
+        try {
+            DefaultTableModel modelo;
+            
+            fCheckOut func = new fCheckOut ();
+            modelo = func.mostrar(buscar);
+            
+            TablaListado.setModel(modelo);
+            
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(rootPane, e);
+        }
+    }
+    
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,26 +41,29 @@ public class CheckOut extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txtBuscar = new javax.swing.JTextField();
+        btnBuscar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtPrecio = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtFechaIn = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        txtDias = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        txtFechaOut = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        txtTotal = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnCheckOut = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TablaListado = new javax.swing.JTable();
+        btnCalcular = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
+        btnLimpiar1 = new javax.swing.JButton();
+        txtPrecio1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(50, 118));
@@ -65,66 +81,71 @@ public class CheckOut extends javax.swing.JFrame {
         jLabel2.setText("No. Habitacion");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 60, -1, -1));
 
-        jTextField1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 50, 190, -1));
+        txtBuscar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        getContentPane().add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 50, 190, -1));
 
-        jButton1.setBackground(new java.awt.Color(102, 0, 102));
-        jButton1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jButton1.setText("Buscar");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 50, 92, -1));
+        btnBuscar.setBackground(new java.awt.Color(102, 0, 102));
+        btnBuscar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 50, 92, -1));
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Nombre Cliente");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, -1, -1));
 
-        jTextField2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 300, -1));
+        txtNombre.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 300, -1));
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Precio por día");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, -1, -1));
 
-        jTextField3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, 300, -1));
+        txtPrecio.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        getContentPane().add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, 300, -1));
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Fecha Check In");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 100, -1, -1));
 
-        jTextField4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 120, 300, -1));
+        txtFechaIn.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        getContentPane().add(txtFechaIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 120, 300, -1));
 
         jLabel6.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Numero de días en estancia");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 160, -1, -1));
 
-        jTextField5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        getContentPane().add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 180, 300, -1));
+        txtDias.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        getContentPane().add(txtDias, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 180, 300, -1));
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Fecha Check Out");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 100, -1, -1));
 
-        jTextField6.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        getContentPane().add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 120, 301, -1));
+        txtFechaOut.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        getContentPane().add(txtFechaOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 120, 301, -1));
 
         jLabel8.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Total a pagar");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 160, -1, -1));
 
-        jTextField7.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+        txtTotal.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        txtTotal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField7ActionPerformed(evt);
+                txtTotalActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 180, 301, -1));
+        getContentPane().add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 180, 301, -1));
 
         jButton2.setBackground(new java.awt.Color(51, 0, 102));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Cancelar.png"))); // NOI18N
@@ -135,17 +156,27 @@ public class CheckOut extends javax.swing.JFrame {
         });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 10, 30, 30));
 
-        jButton3.setBackground(new java.awt.Color(255, 0, 0));
-        jButton3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jButton3.setText("Check Out");
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, -1, -1));
+        btnCheckOut.setBackground(new java.awt.Color(255, 0, 0));
+        btnCheckOut.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnCheckOut.setText("Check Out");
+        btnCheckOut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCheckOutActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnCheckOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, -1, -1));
 
-        jButton4.setBackground(new java.awt.Color(255, 0, 0));
-        jButton4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jButton4.setText("Limpiar");
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 230, 88, -1));
+        btnLimpiar.setBackground(new java.awt.Color(255, 0, 0));
+        btnLimpiar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 230, 88, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TablaListado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -156,24 +187,149 @@ public class CheckOut extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        TablaListado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaListadoMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(TablaListado);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, 1030, 360));
 
+        btnCalcular.setBackground(new java.awt.Color(255, 0, 0));
+        btnCalcular.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnCalcular.setText("Calcular");
+        btnCalcular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCalcularActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnCalcular, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 230, 88, -1));
+
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FondoDetalle.jpg"))); // NOI18N
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 640));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1310, 640));
+
+        btnLimpiar1.setBackground(new java.awt.Color(255, 0, 0));
+        btnLimpiar1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnLimpiar1.setText("Limpiar");
+        btnLimpiar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiar1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnLimpiar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 350, 88, -1));
+
+        txtPrecio1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        getContentPane().add(txtPrecio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, 300, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+    private void txtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7ActionPerformed
+    }//GEN-LAST:event_txtTotalActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+        mostrar(txtBuscar.getText());
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        // TODO add your handling code here:
+        txtNombre.setText("");
+        txtFechaIn.setText("");
+        txtFechaOut.setText("");
+        txtPrecio.setText("");
+        txtDias.setText("");
+        txtTotal.setText("");
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void TablaListadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaListadoMouseClicked
+        // TODO add your handling code here:
+        
+        
+        int fila = TablaListado.rowAtPoint(evt.getPoint());
+        txtNombre.setText(TablaListado.getValueAt(fila, 0).toString());
+        txtFechaIn.setText(TablaListado.getValueAt(fila, 4).toString());
+        txtPrecio.setText(TablaListado.getValueAt(fila, 6).toString());
+    }//GEN-LAST:event_TablaListadoMouseClicked
+
+    private void btnLimpiar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLimpiar1ActionPerformed
+
+    private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
+        // TODO add your handling code here:
+        String total;
+        Double precio;
+        int dias;
+        
+        precio = Double.parseDouble(txtPrecio.getText());
+        dias= Integer.parseInt(txtDias.getText());
+        
+        total=String.valueOf(precio*dias);
+        
+        txtTotal.setText(total);
+        
+    }//GEN-LAST:event_btnCalcularActionPerformed
+
+    private void btnCheckOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckOutActionPerformed
+        // TODO add your handling code here:
+        if (txtFechaOut.getText().length()==0){
+            JOptionPane.showConfirmDialog(rootPane, "Ingrese la fecha de salida del cliente");
+            txtFechaOut.requestFocus();
+            return;
+        }
+        
+        if (txtFechaIn.getText().length()==0){
+            JOptionPane.showConfirmDialog(rootPane, "Ingrese la fecha de entrada del cliente");
+            txtFechaIn.requestFocus();
+            return;
+        }
+        
+        if (txtNombre.getText().length()==0){
+            JOptionPane.showConfirmDialog(rootPane, "Ingrese el nombre del cliente");
+            txtNombre.requestFocus();
+            return;
+        }
+        
+        if (txtDias.getText().length()==0){
+            JOptionPane.showConfirmDialog(rootPane, "Ingrese los días de estancia del cliente");
+            txtDias.requestFocus();
+            return;
+        }
+        
+        if (txtPrecio.getText().length()==0){
+            JOptionPane.showConfirmDialog(rootPane, "Ingrese el precio de la habitación");
+            txtPrecio.requestFocus();
+            return;
+        }
+        
+        if (txtTotal.getText().length()==0){
+            JOptionPane.showConfirmDialog(rootPane, "Ingrese la cuenta del cliente");
+            txtTotal.requestFocus();
+            return;
+        }
+        
+        if (!txtBuscar.getText().equals("")) {
+            int confirmacion;
+            confirmacion = JOptionPane.showConfirmDialog(rootPane, "¿Está seguro que quiere marcar salida?", "Confirmar",2);
+        if(confirmacion==0){
+            fCheckOut func = new fCheckOut();
+            vCheckIn dts = new vCheckIn();
+            
+            dts.setNum(Integer.parseInt(txtBuscar.getText()));
+            func.eliminar(dts);
+            mostrar("");
+            //inhabilitar();
+        }
+        }
+    }//GEN-LAST:event_btnCheckOutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -211,10 +367,13 @@ public class CheckOut extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTable TablaListado;
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnCalcular;
+    private javax.swing.JButton btnCheckOut;
+    private javax.swing.JButton btnLimpiar;
+    private javax.swing.JButton btnLimpiar1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -225,13 +384,13 @@ public class CheckOut extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField txtBuscar;
+    private javax.swing.JTextField txtDias;
+    private javax.swing.JTextField txtFechaIn;
+    private javax.swing.JTextField txtFechaOut;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtPrecio;
+    private javax.swing.JTextField txtPrecio1;
+    private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
 }

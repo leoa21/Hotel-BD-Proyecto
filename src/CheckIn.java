@@ -1,34 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- *
- * @author Leo21
- */
-
+import Datos.vCheckIn;
 import java.text.*;
 import java.util.Calendar;
+import Logica.fCheckIn;
+import javax.swing.JOptionPane;
 
 public class CheckIn extends javax.swing.JFrame {
 
-    /**
-     * Creates new form CheckIn
-     */
+    
     public CheckIn() {
         initComponents();
-        jTextField5.setEditable(false);
+        txtFecha.setEditable(false);
         SimpleDateFormat myFormat = new SimpleDateFormat("yyyy/MM/dd");
         Calendar cal = Calendar.getInstance();
-        jTextField5.setText(myFormat.format(cal.getTime()));
-        
-        
-        
-        
+        txtFecha.setText(myFormat.format(cal.getTime()));
     }
 
+    
+    private String accion="guardar";
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,22 +35,20 @@ public class CheckIn extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField3 = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
+        txtTelefono = new javax.swing.JTextField();
+        cboGenero = new javax.swing.JComboBox<>();
+        txtCorreo = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jLabel8 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        cboCama = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtCuenta = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jTextField5 = new javax.swing.JTextField();
+        cboPago = new javax.swing.JComboBox<>();
+        btnReservar = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
+        txtFecha = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -101,23 +90,23 @@ public class CheckIn extends javax.swing.JFrame {
         jLabel5.setText("Email");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, -1));
 
-        jTextField1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtNombre.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtNombreActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 400, -1));
+        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 400, -1));
 
-        jTextField2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 400, -1));
+        txtTelefono.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        getContentPane().add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 400, -1));
 
-        jComboBox1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Femenino", "Masculino" }));
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 270, 400, -1));
+        cboGenero.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        cboGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Femenino", "Masculino" }));
+        getContentPane().add(cboGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 270, 400, -1));
 
-        jTextField3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, 400, -1));
+        txtCorreo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        getContentPane().add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, 400, -1));
 
         jLabel6.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -126,56 +115,57 @@ public class CheckIn extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Tipo de Cama");
+        jLabel7.setText("No. Habitación");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 180, -1, -1));
 
-        jComboBox2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 180, 400, -1));
-
-        jLabel8.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("No. Cama");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 230, -1, -1));
-
-        jComboBox3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 220, 400, -1));
+        cboCama.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        cboCama.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99", "100", "101", "102", "103", "104", "105", "106", "107", "108", "109", "110", "111", "112", "113", "114", "115", "116", "117", "118", "119", "120", "121", "122", "123", "124", "125", "126", "127", "128", "129", "130", " ", " " }));
+        getContentPane().add(cboCama, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 180, 400, -1));
 
         jLabel9.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Precio");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 270, -1, -1));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 250, -1, 20));
 
-        jTextField4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 270, 400, -1));
+        txtCuenta.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        getContentPane().add(txtCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 250, 400, -1));
 
         jLabel10.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Tipo de Pago");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 310, -1, -1));
 
-        jComboBox4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 310, 400, -1));
+        cboPago.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        cboPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Efectivo", "Tarjeta" }));
+        getContentPane().add(cboPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 310, 400, -1));
 
-        jButton2.setBackground(new java.awt.Color(0, 204, 0));
-        jButton2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jButton2.setText("Reservar");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 460, -1, -1));
-
-        jButton3.setBackground(new java.awt.Color(255, 0, 0));
-        jButton3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jButton3.setText("Limpiar");
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 460, -1, -1));
-
-        jTextField5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        btnReservar.setBackground(new java.awt.Color(0, 204, 0));
+        btnReservar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnReservar.setText("Reservar");
+        btnReservar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                btnReservarActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, 400, -1));
+        getContentPane().add(btnReservar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 460, -1, -1));
+
+        btnLimpiar.setBackground(new java.awt.Color(255, 0, 0));
+        btnLimpiar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 460, -1, -1));
+
+        txtFecha.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        txtFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFechaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, 400, -1));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FondoDetalle.jpg"))); // NOI18N
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 550));
@@ -183,18 +173,90 @@ public class CheckIn extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtNombreActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void txtFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_txtFechaActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservarActionPerformed
+        // TODO add your handling code here:
+        if (txtNombre.getText().length()==0){
+            JOptionPane.showConfirmDialog(rootPane, "Ingrese el nombre del cliente");
+            txtNombre.requestFocus();
+            return;
+        }
+        if (txtCorreo.getText().length()==0){
+            JOptionPane.showConfirmDialog(rootPane, "Ingrese el correo del cliente");
+            txtCorreo.requestFocus();
+            return;
+        }
+        if (txtTelefono.getText().length()==0){
+            JOptionPane.showConfirmDialog(rootPane, "Ingrese el teléfono del cliente");
+            txtTelefono.requestFocus();
+            return;
+        }
+        if (txtCuenta.getText().length()==0){
+            JOptionPane.showConfirmDialog(rootPane, "Ingrese la cuenta del cliente");
+            txtCuenta.requestFocus();
+            return;
+        }
+        if (txtCorreo.getText().length()==0){
+            JOptionPane.showConfirmDialog(rootPane, "Ingrese el correo del empleado");
+            txtCorreo.requestFocus();
+            return;
+        }
+        
+        
+        vCheckIn dts = new vCheckIn();
+        fCheckIn func = new fCheckIn();
+        
+       
+        
+        dts.setNombre_cli(txtNombre.getText());
+        dts.setCorreo_cli(txtCorreo.getText());
+        dts.setTel_cli(txtTelefono.getText());
+        dts.setFecha_llegada(txtFecha.getText());
+        
+        int seleccionado;
+        
+        dts.setCuenta(Double.parseDouble(txtCuenta.getText()));
+        
+        seleccionado = cboGenero.getSelectedIndex();
+        dts.setSexo_cli((String)cboGenero.getItemAt(seleccionado));
+        
+        seleccionado = cboCama.getSelectedIndex();
+        dts.setNum(Integer.parseInt(cboCama.getItemAt(seleccionado)));
+        
+        
+        seleccionado = cboPago.getSelectedIndex();
+        dts.setTipopago((String)cboPago.getItemAt(seleccionado));
+        
+        
+        if(accion.equals("guardar")){
+            if (func.insertar(dts)) {
+                JOptionPane.showMessageDialog(rootPane, "El CheckIn fue registrado con éxito");
+            }
+            
+        }
+       
+    }//GEN-LAST:event_btnReservarActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        
+        txtNombre.setText("");
+        txtCorreo.setText("");
+        txtTelefono.setText("");
+        txtCuenta.setText("");
+        txtFecha.setText("");
+    }//GEN-LAST:event_btnLimpiarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -232,13 +294,12 @@ public class CheckIn extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLimpiar;
+    private javax.swing.JButton btnReservar;
+    private javax.swing.JComboBox<String> cboCama;
+    private javax.swing.JComboBox<String> cboGenero;
+    private javax.swing.JComboBox<String> cboPago;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -248,12 +309,13 @@ public class CheckIn extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField txtCorreo;
+    private javax.swing.JTextField txtCuenta;
+    private javax.swing.JTextField txtFecha;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
+
+    
 }

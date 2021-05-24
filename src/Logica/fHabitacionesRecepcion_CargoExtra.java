@@ -25,14 +25,14 @@ public class fHabitacionesRecepcion_CargoExtra {
         
         DefaultTableModel modelo;
         
-        String [] titulos= {"ID Cargo Extra", "id_habitacion", "id_cargoextra", "descripcion", "precio", "cantidad", "fecha"};
+        String [] titulos= {"ID Cargo Extra", "id_habitacion", "id_cargoextra", "descripcion", "costo", "cantidad", "fecha"};
         String [] registro = new String [8];
         
         totalConsumo = 0;
         
         modelo = new DefaultTableModel(null, titulos);
         
-        sSQL = "select ce.id_cargoextra, ce.habitacion_id_ce, ce.c_cargoextra_id,cce.descripcion_c, cce.precio_c, ce.cantidad_ce ,ce.fecha_ce from cargoextra ce inner join catalog_cargoextra cce on ce.c_cargoextra_id = cce.c_cargoextra_id where habitacion_id_ce= " + buscar + " order by id_cargoextra desc";
+        sSQL = "select ce.id_cargoextra, ce.habitacion_id_ce, ce.c_cargoextra_id,cce.descripcion_c, ce.costo, ce.cantidad_ce ,ce.fecha_ce from cargoextra ce inner join catalog_cargoextra cce on ce.c_cargoextra_id = cce.c_cargoextra_id where habitacion_id_ce= " + buscar + " order by id_cargoextra desc";
         
         try{
             Statement st = cn.createStatement();
@@ -44,11 +44,11 @@ public class fHabitacionesRecepcion_CargoExtra {
                 registro [1] =rs.getString("habitacion_id_ce");
                 registro [2] =rs.getString("c_cargoextra_id");
                 registro [3] =rs.getString("descripcion_c");
-                registro [4] =rs.getString("precio");
-                registro [6] =rs.getString("cantidad_ce");
-                registro [7] =rs.getString("fecha_c");
+                registro [4] =rs.getString("costo");
+                registro [5] =rs.getString("cantidad_ce");
+                registro [6] =rs.getString("fecha_ce");
                 
-                totalConsumo = totalConsumo + (rs.getFloat("cantidad_ce") * rs.getFloat("PrecioUnitario"));
+                
                 
                 modelo.addRow(registro);
                
@@ -75,9 +75,10 @@ public class fHabitacionesRecepcion_CargoExtra {
             pst.setInt(1, dts.getId_cargoextra());
             pst.setInt(2, dts.getHabitacion_id());
             pst.setInt(3, dts.getCce_cargoextra());
-            pst.setFloat(4, dts.getC_cargoextra());
+            pst.setFloat(4, dts.getCosto());
             pst.setString(5, dts.getFecha_ce());
             pst.setInt(6, dts.getCantidad_ce());
+            
             
             
             

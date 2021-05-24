@@ -1,14 +1,10 @@
 
 import Datos.vCargoExtra;
 import Logica.cargoExtra;
-import Logica.conexion;
+
 
 import Logica.habitacion;
 import Logica.fHabitacionesRecepcion_CargoExtra;
-import java.awt.event.ItemEvent;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 
 
@@ -75,7 +71,6 @@ public class HabitacionesRecepcion_CargoExtra extends javax.swing.JFrame {
             
             tablaListado.setModel(modelo);
             ocultar_columna();
-            lblTotalConsumo.setText("Consumo Total $. " + func.totalConsumo);
         }
         catch(Exception e){
             JOptionPane.showConfirmDialog(null, e);
@@ -86,8 +81,9 @@ public class HabitacionesRecepcion_CargoExtra extends javax.swing.JFrame {
     
     public void limpiar(){
         txtCargo_id.setText("");
-        txtPrecioUnitario.setText("");
+        txtCosto.setText("");
         txtCantidad.setText("");
+        txtPrecioUnitario.setText("");
         
        txtFecha.setText("");
         cmbCargoExtra.setSelectedIndex(0);
@@ -120,9 +116,11 @@ public class HabitacionesRecepcion_CargoExtra extends javax.swing.JFrame {
         txtCargo_id = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         txtCantidad = new javax.swing.JTextField();
-        lblTotalConsumo = new javax.swing.JLabel();
         btnEliminar = new javax.swing.JButton();
         txtFecha = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        btnBuscar = new javax.swing.JButton();
+        txtCosto = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -247,10 +245,6 @@ public class HabitacionesRecepcion_CargoExtra extends javax.swing.JFrame {
         txtCantidad.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         getContentPane().add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 330, 120, -1));
 
-        lblTotalConsumo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lblTotalConsumo.setText("Total de consumo: ");
-        getContentPane().add(lblTotalConsumo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 550, -1, -1));
-
         btnEliminar.setBackground(new java.awt.Color(204, 0, 0));
         btnEliminar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnEliminar.setText("Eliminar");
@@ -259,10 +253,26 @@ public class HabitacionesRecepcion_CargoExtra extends javax.swing.JFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 160, 100, -1));
+        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 160, 80, 30));
 
         txtFecha.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         getContentPane().add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 400, 360, -1));
+
+        jLabel9.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel9.setText("Costo");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 440, -1, -1));
+
+        btnBuscar.setBackground(new java.awt.Color(51, 51, 255));
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 160, 80, -1));
+
+        txtCosto.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        getContentPane().add(txtCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 430, 140, -1));
 
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FondoDetalle.jpg"))); // NOI18N
@@ -303,6 +313,11 @@ public class HabitacionesRecepcion_CargoExtra extends javax.swing.JFrame {
             txtPrecioUnitario.requestFocus();
             return;
         }
+         if(txtCosto.getText().equals("")){
+            JOptionPane.showConfirmDialog(rootPane, "No se ha ingresado un costo");
+            txtCosto.requestFocus();
+            return;
+        }
         
         
         vCargoExtra dts = new vCargoExtra();
@@ -318,7 +333,7 @@ public class HabitacionesRecepcion_CargoExtra extends javax.swing.JFrame {
         
         dts.setId_cargoextra(Integer.parseInt(txtCargo_id.getText()));
         dts.setCantidad_ce(Integer.parseInt(txtCantidad.getText()));
-        dts.setCosto(Float.parseFloat(txtPrecioUnitario.getText()));
+        dts.setCosto(Float.parseFloat(txtCosto.getText()));
        
         dts.setFecha_ce(txtFecha.getText());
         
@@ -360,7 +375,7 @@ public class HabitacionesRecepcion_CargoExtra extends javax.swing.JFrame {
         txtCantidad.setText(tablaListado.getValueAt(fila, 2).toString());
         cmbHabitacion.setSelectedItem(tablaListado.getValueAt(fila, 3).toString());
         cmbCargoExtra.setSelectedItem(tablaListado.getValueAt(fila, 4).toString());
-        txtPrecioUnitario.setText(tablaListado.getValueAt(fila, 5).toString());
+        
         
         
         
@@ -368,31 +383,7 @@ public class HabitacionesRecepcion_CargoExtra extends javax.swing.JFrame {
 
     private void cmbHabitacionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbHabitacionItemStateChanged
         
-        
-        //Pendiente
-        if(evt.getStateChange() == ItemEvent.SELECTED){
-            habitacion h = (habitacion) cmbHabitacion.getSelectedItem();
-            try{
-                
-                DefaultTableModel modelo = new DefaultTableModel();
-                tablaListado.setModel(modelo);
-                
-                PreparedStatement ps = null;
-                ResultSet rs = null;
-    
-                conexion mysql = new conexion();
-                Connection con = mysql.conectar();
-                
-                String SQL = "select * from cargoextra where habitacion_id_ce="+h.getId_habitacion();
-                ps = con.prepareStatement(SQL);
-                rs = ps.executeQuery();
-                mostrar(h.getId_habitacion());
-                
-            } catch(Exception e){
-                
-            }
             
-        }
     }//GEN-LAST:event_cmbHabitacionItemStateChanged
 
     private void cmbCargoExtraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCargoExtraActionPerformed
@@ -402,6 +393,10 @@ public class HabitacionesRecepcion_CargoExtra extends javax.swing.JFrame {
     private void cmbCargoExtraItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbCargoExtraItemStateChanged
 
     }//GEN-LAST:event_cmbCargoExtraItemStateChanged
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        mostrar(cmbHabitacion.getSelectedIndex());
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -439,6 +434,7 @@ public class HabitacionesRecepcion_CargoExtra extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnEnviar;
     private javax.swing.JButton btnLimpiar;
@@ -454,11 +450,12 @@ public class HabitacionesRecepcion_CargoExtra extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblTotalConsumo;
     private javax.swing.JTable tablaListado;
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtCargo_id;
+    private javax.swing.JTextField txtCosto;
     private javax.swing.JTextField txtFecha;
     private javax.swing.JTextField txtPrecioUnitario;
     // End of variables declaration//GEN-END:variables

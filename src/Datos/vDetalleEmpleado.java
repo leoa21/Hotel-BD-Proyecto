@@ -1,44 +1,58 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Datos;
 
-/**
- *
- * @author Leo21
- */
-public class vEmpleado {
-    private int id_emp ;
+
+public class vDetalleEmpleado {
+    
+    private int id_emp;
     private String nombre_emp;
     private String correo_emp;
-    private String tel_emp;
-    private float sueldo;
+    private String tel_emp;  
+    private int id_tipoempleado_e;
+    private double sueldo;
+    private String turno;
+    private String sexo_emp;
     private String pais;
     private String estado;
     private String municipio;
-    private String colonia ;
-    private String calle;
-    private int local_id_e;
-    private int id_tipoempleado_e;
+    private String colonia;
+    private String calle ;
+    private int local_id_e; 
 
-    public vEmpleado() {
+    public vDetalleEmpleado() {
     }
 
-    public vEmpleado(int id_emp, String nombre_emp, String correo_emp, String tel_emp, float sueldo, String pais, String estado, String municipio, String colonia, String calle, int local_id_e, int id_tipoempleado_e) {
+    public vDetalleEmpleado(int id_emp, String nombre_emp, String correo_emp, String tel_emp, int id_tipoempleado_e, double sueldo, String turno, String sexo_emp, String pais, String estado, String municipio, String colonia, String calle, int local_id_e) {
         this.id_emp = id_emp;
         this.nombre_emp = nombre_emp;
         this.correo_emp = correo_emp;
         this.tel_emp = tel_emp;
+        this.id_tipoempleado_e = id_tipoempleado_e;
         this.sueldo = sueldo;
+        this.turno = turno;
+        this.sexo_emp = sexo_emp;
         this.pais = pais;
         this.estado = estado;
         this.municipio = municipio;
         this.colonia = colonia;
         this.calle = calle;
         this.local_id_e = local_id_e;
+    }
+
+    public vDetalleEmpleado(int id_emp, String nombre_emp, String correo_emp, String tel_emp, int id_tipoempleado_e, double sueldo, String turno, String sexo_emp, String pais, String estado, String municipio, String colonia, String calle) {
+        this.id_emp = id_emp;
+        this.nombre_emp = nombre_emp;
+        this.correo_emp = correo_emp;
+        this.tel_emp = tel_emp;
         this.id_tipoempleado_e = id_tipoempleado_e;
+        this.sueldo = sueldo;
+        this.turno = turno;
+        this.sexo_emp = sexo_emp;
+        this.pais = pais;
+        this.estado = estado;
+        this.municipio = municipio;
+        this.colonia = colonia;
+        this.calle = calle;
     }
 
     public int getId_emp() {
@@ -73,12 +87,36 @@ public class vEmpleado {
         this.tel_emp = tel_emp;
     }
 
-    public float getSueldo() {
+    public int getId_tipoempleado_e() {
+        return id_tipoempleado_e;
+    }
+
+    public void setId_tipoempleado_e(int id_tipoempleado_e) {
+        this.id_tipoempleado_e = id_tipoempleado_e;
+    }
+
+    public double getSueldo() {
         return sueldo;
     }
 
-    public void setSueldo(float sueldo) {
+    public void setSueldo(double sueldo) {
         this.sueldo = sueldo;
+    }
+
+    public String getTurno() {
+        return turno;
+    }
+
+    public void setTurno(String turno) {
+        this.turno = turno;
+    }
+
+    public String getSexo_emp() {
+        return sexo_emp;
+    }
+
+    public void setSexo_emp(String sexo_emp) {
+        this.sexo_emp = sexo_emp;
     }
 
     public String getPais() {
@@ -129,11 +167,9 @@ public class vEmpleado {
         this.local_id_e = local_id_e;
     }
 
-    public int getId_tipoempleado_e() {
-        return id_tipoempleado_e;
-    }
-
-    public void setId_tipoempleado_e(int id_tipoempleado_e) {
-        this.id_tipoempleado_e = id_tipoempleado_e;
-    }
+    
+    
+    
 }
+
+

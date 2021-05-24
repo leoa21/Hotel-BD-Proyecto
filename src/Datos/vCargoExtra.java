@@ -5,7 +5,6 @@
  */
 package Datos;
 
-import java.util.Date;
 
 /**
  *
@@ -18,19 +17,17 @@ public class vCargoExtra {
     private String fecha_ce;
     private int cantidad_ce;
     private int habitacion_id;
-    private float c_cargoextra;
     private int cce_cargoextra;
 
-    public vCargoExtra(int id_cargoextra, float costo, String fecha_ce, int cantidad_ce, int habitacion_id, float c_cargoextra, int cce_cargoextra) {
+    public vCargoExtra(int id_cargoextra, float costo, String fecha_ce, int cantidad_ce, int habitacion_id, int cce_cargoextra) {
         this.id_cargoextra = id_cargoextra;
         this.costo = costo;
         this.fecha_ce = fecha_ce;
         this.cantidad_ce = cantidad_ce;
         this.habitacion_id = habitacion_id;
-        this.c_cargoextra = c_cargoextra;
         this.cce_cargoextra = cce_cargoextra;
     }
-
+    
     public vCargoExtra(){
         
     }
@@ -75,14 +72,6 @@ public class vCargoExtra {
         this.habitacion_id = habitacion_id;
     }
 
-    public float getC_cargoextra() {
-        return c_cargoextra;
-    }
-
-    public void setC_cargoextra(float c_cargoextra) {
-        this.c_cargoextra = c_cargoextra;
-    }
-
     public int getCce_cargoextra() {
         return cce_cargoextra;
     }
@@ -92,9 +81,9 @@ public class vCargoExtra {
     }
     
     
-    
-    
-    
 
+    
+    
+   
     
 }
